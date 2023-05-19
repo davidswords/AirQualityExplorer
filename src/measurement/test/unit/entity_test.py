@@ -281,3 +281,37 @@ def test_measurement_entity_string_representation_successful(measurement_entity)
 
     # Assert
     assert actual == expected
+
+
+def test_measurement_entity_vars_representation_successful(measurement_entity):
+    # Assign
+    (
+        entity,
+        id_,
+        created_at,
+        updated_at,
+        archived,
+        recorded_at,
+        city,
+        country,
+        pollutant,
+        value,
+    ) = measurement_entity
+
+    expected = {
+        "id_": id_,
+        "created_at": created_at,
+        "updated_at": updated_at,
+        "archived": archived,
+        "recorded_at": recorded_at,
+        "city": city,
+        "country": country,
+        "pollutant": pollutant,
+        "value": value,
+    }
+
+    # Act
+    actual = vars(entity)
+
+    # Assert
+    assert actual == expected
