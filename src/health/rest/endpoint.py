@@ -1,6 +1,8 @@
 from src import app
 
+from flask import jsonify
+
 
 @app.route("/health")
 def health():
-    return "healthy!"
+    return jsonify("healthy!"), 200

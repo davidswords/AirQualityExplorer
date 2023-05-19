@@ -11,23 +11,23 @@ def client():
         yield client
 
 
-def test_health_returns_200_successfully(client):
+def test_retrieve_measurement_country_returns_200_successfully(client):
     # Assign
     expected = 200
 
     # Act
-    actual = client.get("/health").status_code
+    actual = client.get("/measurement/NO").status_code
 
     # Assert
     assert actual == expected
 
 
-def test_health_returns_healthy_msg_successfully(client):
+def test_retrieve_measurement_country_returns_measurements_successfully(client):
     # Assign
-    expected = "healthy!"
+    expected = 4
 
     # Act
-    actual = json.loads(client.get("/health").data)
+    actual = len(json.loads(client.get("/measurement/NO").data))
 
     # Assert
     assert actual == expected
