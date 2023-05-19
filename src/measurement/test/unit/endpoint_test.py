@@ -11,7 +11,7 @@ def client():
         yield client
 
 
-def test_retrieve_measurement_country_returns_200_successfully(client):
+def test_retrieve_measurement_country_returns_200_successful(client):
     # Assign
     expected = 200
 
@@ -22,7 +22,7 @@ def test_retrieve_measurement_country_returns_200_successfully(client):
     assert actual == expected
 
 
-def test_retrieve_measurement_country_returns_measurements_successfully(client):
+def test_retrieve_measurement_country_returns_measurements_successful(client):
     # Assign
     expected = 4
 

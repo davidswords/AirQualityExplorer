@@ -11,7 +11,7 @@ def client():
         yield client
 
 
-def test_health_returns_200_successfully(client):
+def test_health_returns_200_successful(client):
     # Assign
     expected = 200
 
@@ -22,7 +22,7 @@ def test_health_returns_200_successfully(client):
     assert actual == expected
 
 
-def test_health_returns_healthy_msg_successfully(client):
+def test_health_returns_healthy_msg_successful(client):
     # Assign
     expected = "healthy!"
 
