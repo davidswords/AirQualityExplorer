@@ -2,7 +2,5 @@ from flask import Flask
 
 app = Flask(__name__)
 
-
-@app.route("/health")
-def health():
-    return "healthy!"
+with app.app_context():
+    from src.health.rest.endpoint import health
