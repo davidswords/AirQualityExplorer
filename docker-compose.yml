@@ -1,0 +1,11 @@
+services:
+  aq-api:
+    build: .
+    environment:
+      FLASK_DEBUG: 1
+    ports:
+      - "8888:8888"
+    volumes:
+      - '.:/root'
+volumes:
+  aq-db:
