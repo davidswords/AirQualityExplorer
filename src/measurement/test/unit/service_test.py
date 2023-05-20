@@ -7,7 +7,7 @@ def test_retrieve_by_country_returns_one_entity_successful():
     expected = 1
 
     # Act
-    actual = len(service.retrieve_by_country('NO'))
+    actual = len(service.retrieve_by_country("NO"))
 
     # Assert
     assert actual == expected
