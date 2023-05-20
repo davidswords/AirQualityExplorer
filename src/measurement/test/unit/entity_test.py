@@ -6,7 +6,7 @@ from src.measurement.domain.entity import MeasurementEntity
 
 @pytest.fixture
 def measurement_entity():
-    id_ = "216bb524-896f-42d2-8d07-9aa68cd2ea8d"
+    id_ = "216bb524"
     created_at = datetime.now()
     updated_at = created_at
     archived = False

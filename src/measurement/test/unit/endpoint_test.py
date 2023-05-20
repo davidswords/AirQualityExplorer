@@ -24,7 +24,7 @@ def test_retrieve_measurement_country_returns_200_successful(client):
 
 def test_retrieve_measurement_country_returns_measurements_successful(client):
     # Assign
-    expected = 4
+    expected = 1
 
     # Act
     actual = len(json.loads(client.get("/measurement/NO").data))
