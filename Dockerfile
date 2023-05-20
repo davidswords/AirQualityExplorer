@@ -1,9 +1,11 @@
-FROM python:3.11.3-alpine3.18
+FROM python:3.11.3-slim-bullseye
 
 ADD . /root
 
 WORKDIR /root
 
+RUN apt-get update && apt-get install -y libpq-dev gcc netcat
+
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["flask", "--app", "src", "run", "--host=0.0.0.0", "-p", "8888"]
+ENTRYPOINT ["./entrypoint.sh"]
