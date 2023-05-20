@@ -1,5 +1,7 @@
+from datetime import datetime
 from typing import List
 
+from src import db
 from src.measurement.domain.entity import MeasurementEntity
 from src.measurement.data.dao import MeasurementDAO
 
@@ -19,10 +21,40 @@ class MeasurementRepo:
             value=dao.value,
         )
 
+    @staticmethod
+    def _to_dao(entity: MeasurementEntity) -> MeasurementDAO:
+        return MeasurementDAO(
+            id_=entity.id_,
+            created_at=entity.created_at,
+            updated_at=entity.updated_at,
+            archived=entity.archived,
+            recorded_at=entity.recorded_at,
+            city=entity.city,
+            country=entity.country,
+            pollutant=entity.pollutant,
+            value=entity.value,
+        )
+
+    def upsert(self, entity: MeasurementEntity) -> None:
+        dao = MeasurementDAO.query.filter(
+            MeasurementDAO.recorded_at == entity.recorded_at,
+            MeasurementDAO.city == entity.city,
+            MeasurementDAO.country == entity.country,
+            MeasurementDAO.pollutant == entity.pollutant,
+            MeasurementDAO.value == entity.value,
+        ).first()
+
+        if dao is not None:
+            dao.updated_at = datetime.utcnow()
+        else:
+            dao = self._to_dao(entity)
+
+        db.session.add(dao)
+        db.session.commit()
+
     def retrieve_by_country(self, country: str) -> List[MeasurementEntity]:
         daos = MeasurementDAO.query.filter(
-            MeasurementDAO.country == country and
-            MeasurementDAO.archived is False
+            MeasurementDAO.country == country and MeasurementDAO.archived is False
         ).all()
 
         return [self._to_entity(dao) for dao in daos]

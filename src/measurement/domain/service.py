@@ -12,7 +12,7 @@ class MeasurementService:
 
     @staticmethod
     def document_to_entity(document: dict) -> MeasurementEntity:
-        id_ = str(uuid.uuid4()[:8])
+        id_ = str(uuid.uuid4())[:8]
         created_at = updated_at = datetime.utcnow()
 
         return MeasurementEntity(
@@ -26,6 +26,10 @@ class MeasurementService:
             pollutant=document["pollutant"],
             value=document["value"],
         )
+
+    def upsert(self, document: dict) -> None:
+        entity = self.document_to_entity(document=document)
+        self.repo.upsert(entity=entity)
 
     def retrieve_by_country(self, country: str) -> List[MeasurementEntity]:
         return self.repo.retrieve_by_country(country=country)
