@@ -14,12 +14,11 @@ def client():
         yield client
 
 
-# Patch the retrieve_by_country method of the MeasurementService
 @patch("src.measurement.domain.service.MeasurementService.retrieve_by_country")
 def test_retrieve_measurement_country_returns_200_successful(
     mock_retrieve_by_country, client
 ):
-    # Mock the service to return one MeasurementEntity
+    # Assign
     mock_retrieve_by_country.return_value = [
         MeasurementEntity(
             id_="216bb524",
@@ -33,7 +32,6 @@ def test_retrieve_measurement_country_returns_200_successful(
             value=2.5,
         ),
     ]
-    # Assign
     expected = 200
 
     # Act
@@ -47,7 +45,7 @@ def test_retrieve_measurement_country_returns_200_successful(
 def test_retrieve_measurement_country_returns_measurements_successful(
     mock_retrieve_by_country, client
 ):
-    # Mock the service to return one MeasurementEntity
+    # Assign
     mock_retrieve_by_country.return_value = [
         MeasurementEntity(
             id_="216bb524",
@@ -61,8 +59,6 @@ def test_retrieve_measurement_country_returns_measurements_successful(
             value=2.5,
         ),
     ]
-
-    # Assign
     expected = 1
 
     # Act
@@ -72,15 +68,12 @@ def test_retrieve_measurement_country_returns_measurements_successful(
     assert actual == expected
 
 
-# Test for 404 when no entities are returned
 @patch("src.measurement.domain.service.MeasurementService.retrieve_by_country")
 def test_retrieve_measurement_country_returns_404_when_no_entities(
     mock_retrieve_by_country, client
 ):
-    # Mock the service to return an empty list
-    mock_retrieve_by_country.return_value = []
-
     # Assign
+    mock_retrieve_by_country.return_value = []
     expected = 404
 
     # Act

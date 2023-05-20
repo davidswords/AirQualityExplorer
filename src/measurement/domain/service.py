@@ -2,10 +2,14 @@ import uuid
 from datetime import datetime
 from typing import List
 
+from src.measurement.data.repo import MeasurementRepo
 from src.measurement.domain.entity import MeasurementEntity
 
 
 class MeasurementService:
+    def __init__(self, repo: MeasurementRepo = None):
+        self.repo = repo or MeasurementRepo()
+
     @staticmethod
     def document_to_entity(document: dict) -> MeasurementEntity:
         id_ = str(uuid.uuid4()[:8])
@@ -23,18 +27,5 @@ class MeasurementService:
             value=document["value"],
         )
 
-    @staticmethod
-    def retrieve_by_country(country: str) -> List[MeasurementEntity]:
-        return [
-            MeasurementEntity(
-                id_="216bb524",
-                created_at=datetime.utcnow(),
-                updated_at=datetime.utcnow(),
-                archived=False,
-                recorded_at=datetime.utcnow(),
-                city="Trondheim",
-                country="NO",
-                pollutant="PM2.5",
-                value=2.5,
-            ),
-        ]
+    def retrieve_by_country(self, country: str) -> List[MeasurementEntity]:
+        return self.repo.retrieve_by_country(country=country)
