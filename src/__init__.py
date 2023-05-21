@@ -5,18 +5,21 @@ from flasgger import Swagger
 
 from src.measurement.rest.spec import definitions
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="visualization/templates")
 app.config.from_object("src.config")
 db = SQLAlchemy(app)
-swagger = Swagger(app, template={
-    "swagger": "2.0",
-    "info": {
-        "title": "AirQualityExplorer API",
-        "description": " A Flask API for fetching, processing, and visualizing real-time air quality data.",
-        "version": "1.0"
+swagger = Swagger(
+    app,
+    template={
+        "swagger": "2.0",
+        "info": {
+            "title": "AirQualityExplorer API",
+            "description": " A Flask API for fetching, processing, and visualizing real-time air quality data.",
+            "version": "1.0",
+        },
+        "definitions": definitions,
     },
-    "definitions": definitions
-})
+)
 
 with app.app_context():
     from src.health.rest.endpoint import health
@@ -27,6 +30,7 @@ with app.app_context():
     from src.measurement.domain.task import ingest_no_open_aq
     from src.measurement.domain.task import ingest_se_open_aq
     from src.measurement.domain.task import ingest_dk_open_aq
+    from src.visualization.rest.endpoint import map
 
     db.create_all()
 
