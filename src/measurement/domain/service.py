@@ -33,6 +33,9 @@ class MeasurementService:
         entity = self.document_to_entity(document=document)
         self.repo.upsert(entity=entity)
 
+    def retrieve_by_pollutant(self, pollutant: str) -> List[MeasurementEntity]:
+        return self.repo.retrieve_by_pollutant(pollutant=pollutant)
+
     def retrieve_by_country(
         self, pollutant: str, country: str
     ) -> List[MeasurementEntity]:
