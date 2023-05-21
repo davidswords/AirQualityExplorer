@@ -58,9 +58,13 @@ class MeasurementRepo:
         db.session.add(dao)
         db.session.commit()
 
-    def retrieve_by_country(self, country: str) -> List[MeasurementEntity]:
+    def retrieve_by_country(
+        self, pollutant: str, country: str
+    ) -> List[MeasurementEntity]:
         daos = MeasurementDAO.query.filter(
-            MeasurementDAO.country == country and MeasurementDAO.archived is False
+            MeasurementDAO.pollutant == pollutant,
+            MeasurementDAO.country == country,
+            MeasurementDAO.archived.is_(False),
         ).all()
 
         return [self._to_entity(dao) for dao in daos]

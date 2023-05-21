@@ -30,14 +30,14 @@ def test_retrieve_measurement_country_returns_200_successful(
             country="NO",
             latitude=63.446827,
             longitude=10.421906,
-            pollutant="PM2.5",
+            pollutant="PM25",
             value=2.5,
         ),
     ]
     expected = 200
 
     # Act
-    actual = client.get("/measurement/NO").status_code
+    actual = client.get("/measurement/PM25/NO").status_code
 
     # Assert
     assert actual == expected
@@ -59,14 +59,14 @@ def test_retrieve_measurement_country_returns_measurements_successful(
             country="NO",
             latitude=63.446827,
             longitude=10.421906,
-            pollutant="PM2.5",
+            pollutant="PM25",
             value=2.5,
         ),
     ]
     expected = 1
 
     # Act
-    response = client.get("/measurement/NO")
+    response = client.get("/measurement/PM25/NO")
     actual = len(json.loads(response.data))
 
     # Assert
@@ -82,7 +82,7 @@ def test_retrieve_measurement_country_returns_404_when_no_entities(
     expected = 404
 
     # Act
-    actual = client.get("/measurement/NO").status_code
+    actual = client.get("/measurement/PM25/NO").status_code
 
     # Assert
     assert actual == expected

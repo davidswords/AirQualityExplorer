@@ -47,9 +47,10 @@ def test_retrieve_by_country_returns_one_entity_successful(mock_retrieve_by_coun
     # Assign
     service = MeasurementService()
     expected = 1
+    pollutant = "PM2.5"
 
     # Act
-    actual = len(service.retrieve_by_country("NO"))
+    actual = len(service.retrieve_by_country(pollutant, "NO"))
 
     # Assert
     assert actual == expected

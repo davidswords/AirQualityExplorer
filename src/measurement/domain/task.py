@@ -28,11 +28,17 @@ def ingest_open_aq(data: dict) -> None:
                 document = {
                     "city": result["city"],
                     "country": result["country"],
-                    "latitude": result["coordinates"]["latitude"] if result["coordinates"] else None,
-                    "longitude": result["coordinates"]["longitude"] if result["coordinates"] else None,
+                    "latitude": result["coordinates"]["latitude"]
+                    if result["coordinates"]
+                    else None,
+                    "longitude": result["coordinates"]["longitude"]
+                    if result["coordinates"]
+                    else None,
                     "pollutant": parameter["parameter"].upper(),
                     "value": float(parameter["lastValue"]),
-                    "recorded_at": datetime.strptime(parameter["lastUpdated"], "%Y-%m-%dT%H:%M:%S%z"),
+                    "recorded_at": datetime.strptime(
+                        parameter["lastUpdated"], "%Y-%m-%dT%H:%M:%S%z"
+                    ),
                 }
                 service.upsert(document=document)
 
