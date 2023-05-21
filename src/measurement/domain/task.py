@@ -64,3 +64,17 @@ def ingest_dk_open_aq():
     data = fetch_open_aq_by_country("DK")
     ingest_open_aq(data=data)
     app.logger.info("Ingestion of DK Measurements from OpenAQ complete.")
+
+
+def ingest_fi_open_aq():
+    app.logger.info("Ingesting FI Measurements from OpenAQ.")
+    data = fetch_open_aq_by_country("FI")
+    ingest_open_aq(data=data)
+    app.logger.info("Ingestion of FI Measurements from OpenAQ complete.")
+
+
+def ingest_is_open_aq():
+    app.logger.info("Ingesting IS Measurements from OpenAQ.")
+    data = fetch_open_aq_by_country("IS")
+    ingest_open_aq(data=data)
+    app.logger.info("Ingestion of IS Measurements from OpenAQ complete.")

@@ -30,7 +30,10 @@ with app.app_context():
     from src.measurement.domain.task import ingest_no_open_aq
     from src.measurement.domain.task import ingest_se_open_aq
     from src.measurement.domain.task import ingest_dk_open_aq
+    from src.measurement.domain.task import ingest_fi_open_aq
+    from src.measurement.domain.task import ingest_is_open_aq
     from src.visualization.rest.endpoint import map
+    from src.visualization.rest.endpoint import pollutant_map
 
     db.create_all()
 
@@ -51,6 +54,18 @@ with app.app_context():
     scheduler.add_job(
         id="Scheduled Ingestion DK OpenAQ",
         func=ingest_dk_open_aq,
+        trigger="interval",
+        seconds=5,
+    )
+    scheduler.add_job(
+        id="Scheduled Ingestion FI OpenAQ",
+        func=ingest_fi_open_aq,
+        trigger="interval",
+        seconds=5,
+    )
+    scheduler.add_job(
+        id="Scheduled Ingestion IS OpenAQ",
+        func=ingest_is_open_aq,
         trigger="interval",
         seconds=5,
     )
