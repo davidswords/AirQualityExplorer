@@ -12,7 +12,7 @@ def retrieve_by_pollutant(pollutant: str):
     entities = service.retrieve_by_pollutant(pollutant=pollutant)
 
     if not entities:
-        return jsonify({"message": "No measurements found for this pollutant"}), 404
+        return jsonify({"message": "No measurements found for this pollutant."}), 404
 
     return jsonify([vars(entity) for entity in entities]), 200
 
@@ -24,7 +24,7 @@ def retrieve_by_country(pollutant: str, country: str):
     entities = service.retrieve_by_country(pollutant=pollutant, country=country)
 
     if not entities:
-        return jsonify({"message": "No measurements found for this country"}), 404
+        return jsonify({"message": "No measurements found for this country."}), 404
 
     return jsonify([vars(entity) for entity in entities]), 200
 
@@ -36,6 +36,23 @@ def retrieve_by_city(pollutant: str, country: str, city: str):
     entities = service.retrieve_by_city(pollutant=pollutant, country=country, city=city)
 
     if not entities:
-        return jsonify({"message": "No measurements found for this city"}), 404
+        return jsonify({"message": "No measurements found for this city."}), 404
+
+    return jsonify([vars(entity) for entity in entities]), 200
+
+
+@app.route("/measurement/<pollutant>/<latitude>/<longitude>/<radius>", methods=["GET"])
+def retrieve_by_area(pollutant: str, latitude: float, longitude: float, radius: float):
+    service = MeasurementService()
+
+    entities = service.retrieve_by_area(
+        pollutant=pollutant,
+        latitude=float(latitude),
+        longitude=float(longitude),
+        radius=float(radius),
+    )
+
+    if not entities:
+        return jsonify({"message": "No measurements found for this area."}), 404
 
     return jsonify([vars(entity) for entity in entities]), 200

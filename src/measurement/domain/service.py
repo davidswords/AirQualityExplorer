@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
-from typing import List
+from math import radians, cos, degrees, asin, sin
+from typing import List, Tuple
 
 from src.measurement.data.repo import MeasurementRepo
 from src.measurement.domain.entity import MeasurementEntity
@@ -46,4 +47,50 @@ class MeasurementService:
     ) -> List[MeasurementEntity]:
         return self.repo.retrieve_by_city(
             pollutant=pollutant, country=country, city=city
+        )
+
+    @staticmethod
+    def _calculate_bounding_box(
+        latitude: float, longitude: float, radius: float
+    ) -> Tuple[float, float, float, float]:
+        earth_radius = 6371  # km
+
+        # convert latitude and longitude to radians
+        lat_rad = radians(latitude)
+        lon_rad = radians(longitude)
+
+        # calculate the radius in radians
+        rad = radius / earth_radius
+
+        # calculate min/max latitudes
+        min_lat = lat_rad - rad
+        max_lat = lat_rad + rad
+
+        # calculate the difference in longitude
+        delta_lon = asin(sin(rad) / cos(lat_rad))
+
+        # calculate min/max longitudes
+        min_lon = lon_rad - delta_lon
+        max_lon = lon_rad + delta_lon
+
+        # convert back to degrees
+        min_lat = degrees(min_lat)
+        max_lat = degrees(max_lat)
+        min_lon = degrees(min_lon)
+        max_lon = degrees(max_lon)
+
+        return min_lat, max_lat, min_lon, max_lon
+
+    def retrieve_by_area(
+        self, pollutant: str, latitude: float, longitude: float, radius: float
+    ) -> List[MeasurementEntity]:
+        min_lat, max_lat, min_lon, max_lon = self._calculate_bounding_box(
+            latitude, longitude, radius
+        )
+        return self.repo.retrieve_by_area(
+            pollutant=pollutant,
+            min_lat=min_lat,
+            max_lat=max_lat,
+            min_lon=min_lon,
+            max_lon=max_lon,
         )

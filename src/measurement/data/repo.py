@@ -88,3 +88,23 @@ class MeasurementRepo:
         ).all()
 
         return [self._to_entity(dao) for dao in daos]
+
+    def retrieve_by_area(
+        self,
+        pollutant: str,
+        min_lat: float,
+        max_lat: float,
+        min_lon: float,
+        max_lon: float,
+    ) -> List[MeasurementEntity]:
+        daos = MeasurementDAO.query.filter(
+            MeasurementDAO.pollutant == pollutant,
+            MeasurementDAO.archived.is_(False),
+            MeasurementDAO.latitude >= min_lat,
+            MeasurementDAO.latitude <= max_lat,
+            MeasurementDAO.longitude >= min_lon,
+            MeasurementDAO.longitude <= max_lon,
+        ).all()
+
+        # return as entity objects
+        return [self._to_entity(dao) for dao in daos]

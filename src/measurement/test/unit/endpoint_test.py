@@ -234,3 +234,77 @@ def test_retrieve_measurement_city_returns_404_when_no_entities(
 
     # Assert
     assert actual == expected
+
+
+@patch("src.measurement.domain.service.MeasurementService.retrieve_by_area")
+def test_retrieve_measurement_area_returns_200_successful(
+    mock_retrieve_by_area, client
+):
+    # Assign
+    mock_retrieve_by_area.return_value = [
+        MeasurementEntity(
+            id_="216bb524",
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow(),
+            archived=False,
+            recorded_at=datetime.utcnow(),
+            city="Oslo",
+            country="NO",
+            latitude=59.9139,
+            longitude=10.7522,
+            pollutant="PM25",
+            value=2.5,
+        ),
+    ]
+    expected = 200
+
+    # Act
+    actual = client.get("/measurement/PM25/59.9139/10.7522/100").status_code
+
+    # Assert
+    assert actual == expected
+
+
+@patch("src.measurement.domain.service.MeasurementService.retrieve_by_area")
+def test_retrieve_measurement_area_returns_measurements_successful(
+    mock_retrieve_by_area, client
+):
+    # Assign
+    mock_retrieve_by_area.return_value = [
+        MeasurementEntity(
+            id_="216bb524",
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow(),
+            archived=False,
+            recorded_at=datetime.utcnow(),
+            city="Oslo",
+            country="NO",
+            latitude=59.9139,
+            longitude=10.7522,
+            pollutant="PM25",
+            value=2.5,
+        ),
+    ]
+    expected = 1
+
+    # Act
+    response = client.get("/measurement/PM25/59.9139/10.7522/100")
+    actual = len(json.loads(response.data))
+
+    # Assert
+    assert actual == expected
+
+
+@patch("src.measurement.domain.service.MeasurementService.retrieve_by_area")
+def test_retrieve_measurement_area_returns_404_when_no_entities(
+    mock_retrieve_by_area, client
+):
+    # Assign
+    mock_retrieve_by_area.return_value = []
+    expected = 404
+
+    # Act
+    actual = client.get("/measurement/PM25/59.9139/10.7522/100").status_code
+
+    # Assert
+    assert actual == expected
