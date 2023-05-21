@@ -1,10 +1,22 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_apscheduler import APScheduler
+from flasgger import Swagger
+
+from src.measurement.rest.spec import definitions
 
 app = Flask(__name__)
 app.config.from_object("src.config")
 db = SQLAlchemy(app)
+swagger = Swagger(app, template={
+    "swagger": "2.0",
+    "info": {
+        "title": "AirQualityExplorer API",
+        "description": " A Flask API for fetching, processing, and visualizing real-time air quality data.",
+        "version": "1.0"
+    },
+    "definitions": definitions
+})
 
 with app.app_context():
     from src.health.rest.endpoint import health
