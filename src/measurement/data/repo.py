@@ -76,3 +76,15 @@ class MeasurementRepo:
         ).all()
 
         return [self._to_entity(dao) for dao in daos]
+
+    def retrieve_by_city(
+        self, pollutant: str, country: str, city: str
+    ) -> List[MeasurementEntity]:
+        daos = MeasurementDAO.query.filter(
+            MeasurementDAO.pollutant == pollutant,
+            MeasurementDAO.country == country,
+            MeasurementDAO.city == city,
+            MeasurementDAO.archived.is_(False),
+        ).all()
+
+        return [self._to_entity(dao) for dao in daos]

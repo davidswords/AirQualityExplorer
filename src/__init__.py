@@ -10,6 +10,7 @@ with app.app_context():
     from src.health.rest.endpoint import health
     from src.measurement.rest.endpoint import retrieve_by_pollutant
     from src.measurement.rest.endpoint import retrieve_by_country
+    from src.measurement.rest.endpoint import retrieve_by_city
     from src.measurement.data.dao import MeasurementDAO
     from src.measurement.domain.task import ingest_no_open_aq
     from src.measurement.domain.task import ingest_se_open_aq

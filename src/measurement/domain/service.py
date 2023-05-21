@@ -40,3 +40,10 @@ class MeasurementService:
         self, pollutant: str, country: str
     ) -> List[MeasurementEntity]:
         return self.repo.retrieve_by_country(pollutant=pollutant, country=country)
+
+    def retrieve_by_city(
+        self, pollutant: str, country: str, city: str
+    ) -> List[MeasurementEntity]:
+        return self.repo.retrieve_by_city(
+            pollutant=pollutant, country=country, city=city
+        )
