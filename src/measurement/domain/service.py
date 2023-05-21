@@ -23,6 +23,8 @@ class MeasurementService:
             recorded_at=document["recorded_at"],
             city=document["city"],
             country=document["country"],
+            latitude=document["latitude"],
+            longitude=document["longitude"],
             pollutant=document["pollutant"],
             value=document["value"],
         )

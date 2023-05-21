@@ -17,6 +17,8 @@ class MeasurementRepo:
             recorded_at=dao.recorded_at,
             city=dao.city,
             country=dao.country,
+            latitude=dao.latitude,
+            longitude=dao.longitude,
             pollutant=dao.pollutant,
             value=dao.value,
         )
@@ -31,6 +33,8 @@ class MeasurementRepo:
             recorded_at=entity.recorded_at,
             city=entity.city,
             country=entity.country,
+            latitude=entity.latitude,
+            longitude=entity.longitude,
             pollutant=entity.pollutant,
             value=entity.value,
         )
@@ -40,6 +44,8 @@ class MeasurementRepo:
             MeasurementDAO.recorded_at == entity.recorded_at,
             MeasurementDAO.city == entity.city,
             MeasurementDAO.country == entity.country,
+            MeasurementDAO.latitude == entity.latitude,
+            MeasurementDAO.longitude == entity.longitude,
             MeasurementDAO.pollutant == entity.pollutant,
             MeasurementDAO.value == entity.value,
         ).first()

@@ -13,6 +13,8 @@ def measurement_entity():
     recorded_at = created_at
     city = "San Francisco"
     country = "US"
+    latitude = 37.7749
+    longitude = -122.4194
     pollutant = "CO2"
     value = 200.0
 
@@ -24,6 +26,8 @@ def measurement_entity():
         recorded_at,
         city,
         country,
+        latitude,
+        longitude,
         pollutant,
         value,
     )
@@ -37,6 +41,8 @@ def measurement_entity():
         recorded_at,
         city,
         country,
+        latitude,
+        longitude,
         pollutant,
         value,
     )
@@ -47,6 +53,8 @@ def test_measurement_entity_id__initialization_successful(measurement_entity):
     (
         entity,
         id_,
+        _,
+        _,
         _,
         _,
         _,
@@ -78,6 +86,8 @@ def test_measurement_entity_created_at_initialization_successful(measurement_ent
         _,
         _,
         _,
+        _,
+        _,
     ) = measurement_entity
     expected = created_at
 
@@ -95,6 +105,8 @@ def test_measurement_entity_updated_at_initialization_successful(measurement_ent
         _,
         _,
         updated_at,
+        _,
+        _,
         _,
         _,
         _,
@@ -124,6 +136,8 @@ def test_measurement_entity_archived_initialization_successful(measurement_entit
         _,
         _,
         _,
+        _,
+        _,
     ) = measurement_entity
     expected = archived
 
@@ -143,6 +157,8 @@ def test_measurement_entity_recorded_at_initialization_successful(measurement_en
         _,
         _,
         recorded_at,
+        _,
+        _,
         _,
         _,
         _,
@@ -170,6 +186,8 @@ def test_measurement_entity_city_initialization_successful(measurement_entity):
         _,
         _,
         _,
+        _,
+        _,
     ) = measurement_entity
     expected = city
 
@@ -193,6 +211,8 @@ def test_measurement_entity_country_initialization_successful(measurement_entity
         country,
         _,
         _,
+        _,
+        _,
     ) = measurement_entity
     expected = country
 
@@ -203,10 +223,62 @@ def test_measurement_entity_country_initialization_successful(measurement_entity
     assert actual == expected
 
 
+def test_measurement_entity_latitude_initialization_successful(measurement_entity):
+    # Assign
+    (
+        entity,
+        _,
+        _,
+        _,
+        _,
+        _,
+        _,
+        _,
+        latitude,
+        _,
+        _,
+        _,
+    ) = measurement_entity
+    expected = latitude
+
+    # Act
+    actual = entity.latitude
+
+    # Assert
+    assert actual == expected
+
+
+def test_measurement_entity_longitude_initialization_successful(measurement_entity):
+    # Assign
+    (
+        entity,
+        _,
+        _,
+        _,
+        _,
+        _,
+        _,
+        _,
+        _,
+        longitude,
+        _,
+        _,
+    ) = measurement_entity
+    expected = longitude
+
+    # Act
+    actual = entity.longitude
+
+    # Assert
+    assert actual == expected
+
+
 def test_measurement_entity_pollutant_initialization_successful(measurement_entity):
     # Assign
     (
         entity,
+        _,
+        _,
         _,
         _,
         _,
@@ -238,6 +310,8 @@ def test_measurement_entity_value_initialization_successful(measurement_entity):
         _,
         _,
         _,
+        _,
+        _,
         value,
     ) = measurement_entity
     expected = value
@@ -260,6 +334,8 @@ def test_measurement_entity_string_representation_successful(measurement_entity)
         recorded_at,
         city,
         country,
+        latitude,
+        longitude,
         pollutant,
         value,
     ) = measurement_entity
@@ -272,6 +348,8 @@ def test_measurement_entity_string_representation_successful(measurement_entity)
         f"{recorded_at}\n"
         f"{city}\n"
         f"{country}\n"
+        f"{latitude}\n"
+        f"{longitude}\n"
         f"{pollutant}\n"
         f"{value}\n"
     )
@@ -294,6 +372,8 @@ def test_measurement_entity_vars_representation_successful(measurement_entity):
         recorded_at,
         city,
         country,
+        latitude,
+        longitude,
         pollutant,
         value,
     ) = measurement_entity
@@ -306,6 +386,8 @@ def test_measurement_entity_vars_representation_successful(measurement_entity):
         "recorded_at": recorded_at,
         "city": city,
         "country": country,
+        "latitude": latitude,
+        "longitude": longitude,
         "pollutant": pollutant,
         "value": value,
     }

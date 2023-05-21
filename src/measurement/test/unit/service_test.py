@@ -10,6 +10,8 @@ def test_upsert_calls_repo_upsert_once(mock_upsert):
         "recorded_at": datetime.utcnow(),
         "city": "Oslo",
         "country": "NO",
+        "latitude": 59.9139,
+        "longitude": 10.7522,
         "pollutant": "PM2.5",
         "value": 2.5,
     }
@@ -35,6 +37,8 @@ def test_retrieve_by_country_returns_one_entity_successful(mock_retrieve_by_coun
             recorded_at=datetime.utcnow(),
             city="Trondheim",
             country="NO",
+            latitude=63.4468,
+            longitude=10.4219,
             pollutant="PM2.5",
             value=2.5,
         )

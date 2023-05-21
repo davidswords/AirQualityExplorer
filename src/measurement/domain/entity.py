@@ -11,6 +11,8 @@ class MeasurementEntity:
         recorded_at: datetime,
         city: str,
         country: str,
+        latitude: float,
+        longitude: float,
         pollutant: str,
         value: float,
     ):
@@ -21,6 +23,8 @@ class MeasurementEntity:
         self.recorded_at = recorded_at
         self.city = city
         self.country = country
+        self.latitude = latitude
+        self.longitude = longitude
         self.pollutant = pollutant
         self.value = value
 
@@ -33,6 +37,8 @@ class MeasurementEntity:
             f"{self.recorded_at}\n"
             f"{self.city}\n"
             f"{self.country}\n"
+            f"{self.latitude}\n"
+            f"{self.longitude}\n"
             f"{self.pollutant}\n"
             f"{self.value}\n"
         )

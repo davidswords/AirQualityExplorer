@@ -28,6 +28,8 @@ def test_retrieve_measurement_country_returns_200_successful(
             recorded_at=datetime.utcnow(),
             city="Trondheim",
             country="NO",
+            latitude=63.446827,
+            longitude=10.421906,
             pollutant="PM2.5",
             value=2.5,
         ),
@@ -55,6 +57,8 @@ def test_retrieve_measurement_country_returns_measurements_successful(
             recorded_at=datetime.utcnow(),
             city="Trondheim",
             country="NO",
+            latitude=63.446827,
+            longitude=10.421906,
             pollutant="PM2.5",
             value=2.5,
         ),
@@ -62,7 +66,8 @@ def test_retrieve_measurement_country_returns_measurements_successful(
     expected = 1
 
     # Act
-    actual = len(json.loads(client.get("/measurement/NO").data))
+    response = client.get("/measurement/NO")
+    actual = len(json.loads(response.data))
 
     # Assert
     assert actual == expected
