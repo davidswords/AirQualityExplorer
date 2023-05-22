@@ -36,11 +36,11 @@
         <h1>AirQualityExplorer API 1.0</h1>
         <select id="pollutant-select" onchange="location = this.value; showPollutantInfo();">
             <option value="" selected>Select a pollutant</option>
-            <option value="/map/PM10" {% if pollutant == 'PM10' %}selected{% endif %}>PM10</option>
-            <option value="/map/PM25" {% if pollutant == 'PM25' %}selected{% endif %}>PM25</option>
-            <option value="/map/CO" {% if pollutant == 'CO' %}selected{% endif %}>CO</option>
-            <option value="/map/O3" {% if pollutant == 'O3' %}selected{% endif %}>O3</option>
-            <option value="/map/NO2" {% if pollutant == 'NO2' %}selected{% endif %}>NO2</option>
+            <option value="/map/PM10" {% if pollutant=='PM10' %}selected{% endif %}>PM10</option>
+            <option value="/map/PM25" {% if pollutant=='PM25' %}selected{% endif %}>PM25</option>
+            <option value="/map/CO" {% if pollutant=='CO' %}selected{% endif %}>CO</option>
+            <option value="/map/O3" {% if pollutant=='O3' %}selected{% endif %}>O3</option>
+            <option value="/map/NO2" {% if pollutant=='NO2' %}selected{% endif %}>NO2</option>
         </select>
     </div>
     <div id="content">
