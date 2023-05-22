@@ -24,8 +24,6 @@ To run the AirQualityExplorer API, follow the steps below:
 
 6. Additionally, you can view a simple interactive map of the pollutant data from different countries gathered so far by visiting [http://localhost:8888](http://localhost:8888).
 
-Certainly! Here's an updated version of the API endpoints section that includes the information about using the default credentials to access the Postgres database:
-
 ### API Endpoints
 
 ### Retrieve Measurements by Pollutant
@@ -84,8 +82,6 @@ The Postgres database used by the AirQualityExplorer API can be accessed using t
 
 - **Host:** localhost
 - **Port:** 5432
-
-
 - **Database Name:** aqe
 - **Username:** postgres
 - **Password:** postgres
