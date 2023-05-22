@@ -29,6 +29,7 @@ def pollutant_map(pollutant: str):
 
     app.logger.info(min_value)
     app.logger.info(max_value)
+    app.logger.info(values)
 
     # Create a colormap for the data
     colormap = branca.colormap.LinearColormap(
@@ -42,9 +43,7 @@ def pollutant_map(pollutant: str):
     # Add a marker for each measurement
     for entity in entities:
         if entity.latitude and entity.longitude and entity.value >= 0:
-            # Normalize the value to 0-1 range and then use colormap to get the color
-            normalized_value = (entity.value - min_value) / (max_value - min_value)
-            marker_color = colormap(normalized_value)
+            marker_color = colormap(entity.value)
             folium.CircleMarker(
                 location=[entity.latitude, entity.longitude],
                 radius=10,
@@ -61,3 +60,4 @@ def pollutant_map(pollutant: str):
     map_html = m._repr_html_()
 
     return render_template("map.html", map=map_html, pollutant=pollutant)
+
