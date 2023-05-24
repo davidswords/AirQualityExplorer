@@ -12,5 +12,5 @@ class MeasurementDAO(db.Model):
     country = db.Column(db.String(40), nullable=False)
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
-    pollutant = db.Column(db.String(5), nullable=False)
+    pollutant = db.Column(db.String(40), nullable=False)
     value = db.Column(db.Float, default=0.0, nullable=False)
